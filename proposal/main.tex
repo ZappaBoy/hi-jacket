@@ -17,7 +17,7 @@ headsepline, % Uncomment to get a line under the header
 \usepackage[utf8]{inputenc} % Required for inputting international characters
 \usepackage[T1]{fontenc} % Output font encoding for international characters
 \usepackage{mathpazo} % Use the Palatino font by default
-\usepackage[backend=bibtex,style=authoryear,natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
+\usepackage[backend=bibtex, sorting=none, natbib=true]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 \usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
 \usepackage{enumitem}
 \usepackage{listings}
@@ -31,7 +31,9 @@ headsepline, % Uncomment to get a line under the header
 \usepackage{wrapfig}
 \usepackage{mathtools}
 \usepackage{titlesec}
+\usepackage{hyperref}
 
+\newcommand\citen[1]{\citeauthor{#1} \cite{#1}}
 \addbibresource{related_work.bib} % The filename of the bibliography
 
 \graphicspath{
@@ -44,7 +46,7 @@ headsepline, % Uncomment to get a line under the header
  {\par\noindent\ignorespacesafterend}
 
  \titleformat{\chapter}[display]
- {\centering\normalfont\bfseries}{}{0pt}{\Huge}
+ {\centering\normalfont\bfseries}{}{0pt}{\LARGE}
 
 %----------------------------------------------------------------------------------------
 %	MARGIN SETTINGS
@@ -119,7 +121,7 @@ headsepline, % Uncomment to get a line under the header
 %	THESIS INFORMATION
 %----------------------------------------------------------------------------------------
 
-\thesistitle{TODO GPU cryptojacking} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
+\thesistitle{Cryptojacking attack and defence based on Graphics Processing Units} % Your thesis title, this is used in the title and abstract, print it elsewhere with \ttitle
 %\supervisor{Dr.\ Name \textsc{Surname}} % Your supervisor's name, this is used in the title page, print it elsewhere with \supname
 %\examiner{} % Your examiner's name, this is not currently used anywhere in the template, print it elsewhere with \examname
 %\degree{Computer Science} % Your degree name, this is used in the title page and abstract, print it elsewhere with \degreename
@@ -206,39 +208,49 @@ headsepline, % Uncomment to get a line under the header
 %	ABSTRACT PAGE
 %----------------------------------------------------------------------------------------
 
-\begin{abstract}
-  \chapter*{Abstract}
+% \begin{abstract}
+%   \chapter*{Abstract}
 
-\end{abstract}
+% \end{abstract}
 
-\vspace*{50px}
-\bigskip
+% \vspace*{50px}
+% \bigskip
 
 %----------------------------------------------------------------------------------------
 %	TABLE OF CONTENTS AND LIST OF FIGURES
 %----------------------------------------------------------------------------------------
 
-\tableofcontents
-\newpage
+%\tableofcontents
+%\newpage
 
-\listoffigures
-\newpage
+%\listoffigures
+%\newpage
 
 %----------------------------------------------------------------------------------------
 %	PROPOSAL
 %----------------------------------------------------------------------------------------
 
-\chapter{\centering Research topic}
+{\let\clearpage\relax \chapter{Research topic}}
 In quest'ultimo decennio si è molto sentito parlare di moneta digitale e delle così dette criptovalute, da qualche anno infatti sulla bocca di tutti risaltano parole di innovazione e opportunità in seguito all'avvento della nuova tecnologia blockchain basata sulla logica di database distribuito. Proprio grazie a quest'ultima è nata la prima criptovaluta al mondo, più precisamente, il 3 gennaio 2009 veniva alla luce il blocco genesi di Bitcoin composto allora da 50 \emph{BTC} dal valore complessivo di neppure un dollaro statunitense dato il prezzo iniziale di \$0.0008 per Bitcoin. In seguito all'ottimo riscontro in molteplici campi il 6 novembre 2010 un Bitcoin si presentava con un valore di \$0,50, in meno di due anni il prezzo era aumentato di 625 volte, e da allora in poco più di sette anni, Bitcoin raggiunse il suo massimo storico di quasi \$20.000 ovvero circa 40.000 volte in più. Divenuto un caso più unico che raro, Bitcoin si è posto da apripista a più di 5000 altre criptovalute fino ad essere definito come l'oro del \RN{21} secolo. Questa definizione non è dovuta solo all'incredibile aumento del prezzo di Bitcoin negli ultimi anni ma anche ad una delle caratteristiche chiave che l'oro e la maggior parte delle criptovalute condivide, il processo di ``estrazione'' definito come \emph{mining} nel campo delle monete digitali.\\
 Il \emph{mining} di criptovalute consiste nel creare monete virtuali attraverso la risoluzione di alcune funzioni crittografiche necessarie per la validazione delle transazioni e dei blocchi che compongono una blockchain. Questa operazione termina con un compenso da parte della blockchain al miner, il quale avendo offerto la sua potenza di calcolo per la validazione del blocco viene premiato con la stessa criptovaluta minata. Questi calcoli vengono eseguiti dai sistemi informatici dedicati al processo specifico, questi sistemi sono divisi in due grandi macro sezioni: quelli che sfruttano la Central Processing Unit e quelli che sfruttano invece la Graphics processing unit. I primi prendono il nome di \emph{ASIC} acronimo di \emph{Application Specific Integrated Circuit} ovvero circuiti costruiti per la risoluzione di un calcolo ben specifico che risultano però molto inefficienti su altri tipi di algoritmi. I sistemi basati su GPU sono invece molto più prestanti grazie proprio al fatto che le schede video riescono ad effettuare più calcoli al secondo rispetto alle CPU e quindi risultare più redditizie, d'altro canto risultano essere molto più difficili nella gestione delle temperature e nettamente più costose in termini di assemblaggio e di efficienza energetica. Proprio questi ultimi costi sono quelli di notevole impatto quando si parla di mining, il costo di acquisto delle componenti è infatti nettamente aumentato negli ultimi anni, questo sia a causa delle nuove scoperte tecnologiche sia proprio a causa delle grandi farm di mining sparse per il mondo che acquistano costantemente sempre più componenti per ingrandire i propri centri di estrazione. Il costo energetico che questi sistemi comportano ha portato invece le grandi farm a svilupparsi maggiormente nei paesi con costi dell'elettricità più bassi e allo stesso tempo ha reso molto più impegnativo l'operazione di mining per chi volesse entrarne a far parte.\\
 È così che con l'aumentare dei costi e allo stesso tempo delle opportunità di guadagno offerte dal mondo delle blockchain sempre più in crescita che le criptovalute hanno iniziato a risaltare agli occhi degli hacker malintenzionati. Più precisamente la tecnologia blockchain, e di conseguenza le criptovalute, posseggono, per lo meno la maggior parte di esse, una caratteristica molto importante per i cyber criminali ovvero garantiscono una certa forma di anonimato. Le criptovalute infatti soffrono dello stesso problema del contante comune, non sono infatti in alcun modo collegabili ad un'entità specifica, l'unico ad averne controllo è colui che le possiede. L'unione di queste circostanze ha portato a un'enorme utilizzo delle criptovalute per lo svolgimento di azioni illecite attraverso il web, nel 2017 infatti si è riscontrato un netto aumento dei \emph{ransomware}, virus che bloccano in qualche modo il sistema al quale accedono con l'intento di ottenere un riscatto per il suo sblocco. L'incremento di questi attacchi è dovuto infatti principalmente alla pratica dei cyber criminali di richiedere il riscatto sotto forma di criptovalute così da risultare irrintracciabili, successivamente si è arrivati a una forma di attacco più intelligente e meno invasiva che utilizza i \emph{cryptominers}. Definito appunto come ``L'anno dei cryptominers'', il 2018 vede la stessa impennata di casi di \emph{ransomware} dell'anno precedente in una nuova tipologia di attacco che utilizza sì le criptovalute come mezzo di guadagno ma sfruttando un'operazione lecita come quella del mining. Questa tecnica detta \emph{cryptojacking} consiste in virus che si insidiano all'interno del computer della vittima ed utilizzano la sua potenza computazionale per l'estrazione di criptovalute, il guadagno di questo processo sarà poi attribuito non ai possessori del calcolatore bensì all'attaccante. Il tutto avviene seguendo un basso profilo tramite programmi infetti che vengono installati sul computer o più recentemente si è affermato l'utilizzo di script malevoli presenti all'interno di pagine web. La sostanziale differenza tra le due tipologie di \emph{cryptominers} sta principalmente nella loro rintracciabilità, infatti quelli che operano attraverso il web sono più difficili da controllare rispetto a programmi che vengono installati e che sono quindi sotto l'occhio diretto di antivirus e delle politiche dettate dal sistema operativo.\\
 L'ultima ma sostanziale differenziazione che va fatta quando si parla di \emph{cryptojacking} risiede nelle componenti del calcolatore che si va ad utilizzare: appurato che le GPU offrono dei ricavi maggiori in termini di \emph{mining} rispetto alle CPU, queste non sono però facilmente utilizzabili attraverso il web a differenza delle altre. Ciò ha portato infatti ad uno sviluppo maggiore dei \emph{cryptominers} basati su CPU e di conseguenza a sistemi di difesa che si concentrano su di essi mentre si sono trascurate le minacce derivanti da attacchi più sofisticati che puntano invece alla Graphics Processing Unit.
 
-\chapter{Related Work}
+{\let\clearpage\relax \chapter{Related Work}}
+Come fatto notare in precedenza lo stato dell'arte si è mosso principalmente verso la l'aspetto riproposto più frequentemente ovvero il \emph{cryptojacking} basato su CPU. In generale sia \citen{musch2018web} che \citen{saad2018end} mostrano la diffusione di \emph{cryptominers} nei siti web, analizzando l'efficacia di tecniche di blacklisting che risultano però essere una protezione insufficiente e poco pratica. \citen{wang2018seismic} forniscono un metodo di analisi di firme basate su istruzioni della CPU durante l'esecuzione dei moduli \emph{WebAssembly}. \citen{konoth2018minesweeper} introducono invece \emph{MineSweeper} basato anch'esso sul precedente principio di firme ma aggiunge inoltre il rilevamento di eccessive chiamate di sistema di natura crittografica durante l'esecuzione di un programma. \citen{kharraz2019outguard} dimostrano invece che come l'utilizzo della CPU generi una grande quantità di falsi positivi da sola all'interno della navigazione web. Differentemente da quelli precedentemente citati, \citen{tahir2017mining} presentano \emph{MineGuard}, un sistema che rileva tramite l'analisi delle prestazioni hardware associate agli algoritmi di mining i \emph{cryptominers}. Il sistema monitora costantemente sia CPU che GPU ed inoltre offre un'ottima soluzione sia in termini di efficienza che di utilizzo di risorse per la sua esecuzione. \citen{belkin2019risks} offrono infine una soluzione più pratica in ambito web, dedicata esclusivamente a \emph{cryptominers} di GPU che utilizzano la libreria grafica \emph{WebGL}.
 
-\chapter{Aims and Objectives}
+{\let\clearpage\relax \chapter{Aims and Objectives}}
+\textbf{Obiettivi del progetto:}
+\begin{enumerate}[label=(\roman*)]
+        \item\label{O1} Sviluppare un \emph{cryptominer} basato sull'utilizzo di Graphics Processing Units.
+        \item\label{O2} Sviluppare un sistema per l'inserimento del \emph{cryptominer} all'interno di pagine web.
+        \item\label{O3} Identificare e sviluppare una modalità di difesa contro l'attacco.
+\end{enumerate}
+Lo scopo ultimo del progetto è quello di sviluppare un attacco basato sulla tecnica del \emph{cryptojacking} che operi su GPU e svilupparne una difesa.\\
+Per il raggiungimento di tale scopo è innanzitutto necessario \ref{O1} sviluppare un programma in ambito web che effettui l'operazione di mining attraverso l'utilizzo della GPU, e successivamente \ref{O2} creare un sistema che permetta al codice malevolo di raggiungere le vittime tramite delle pagine web. Una volta sviluppato e testata l'efficienza di questo sistema di attacco, sarà possibile \ref{O3} individuare una modalità di individuazione efficiente contro l'attacco sviluppato e utilizzarla per implementare una difesa, con l'intento di scongiurare questo tipo di attacchi in futuro.
 
-\chapter{Methodology}
+{\let\clearpage\relax \chapter{Methodology}}
+Some stuff
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
