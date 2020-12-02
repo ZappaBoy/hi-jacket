@@ -30,6 +30,7 @@ headsepline, % Uncomment to get a line under the header
 \usepackage[caption=false]{subfig}
 \usepackage{wrapfig}
 \usepackage{mathtools}
+\usepackage{titlesec}
 
 \addbibresource{related_work.bib} % The filename of the bibliography
 
@@ -41,6 +42,9 @@ headsepline, % Uncomment to get a line under the header
 \newenvironment{nscenter}
  {\parskip=0pt\par\nopagebreak\centering}
  {\par\noindent\ignorespacesafterend}
+
+ \titleformat{\chapter}[display]
+ {\centering\normalfont\bfseries}{}{0pt}{\Huge}
 
 %----------------------------------------------------------------------------------------
 %	MARGIN SETTINGS
@@ -55,6 +59,61 @@ headsepline, % Uncomment to get a line under the header
 	bottom=1.5cm, % Bottom margin
 	%showframe, % Uncomment to show how the type block is set on the page
 }
+
+% \bibliographystyle{apjtitles}
+\usepackage{graphicx}
+%\usepackage{natbib}
+\usepackage{multicol}
+
+% column separation in multicol environment
+\setlength{\columnsep}{0.3in}
+% some natbib formatting
+%\bibpunct{(}{)}{;}{a}{}{,}
+% \renewcommand{\bibsection}{}
+% \renewcommand{\bibsep}{0pt}
+
+\pdfpagewidth 8.5in
+\pdfpageheight 11in
+
+%%% \Linespread{1.042}
+%%% \normalsize
+%%% \textwidth=6.5in
+%%% \textheight=9.0in
+%%% %%% \topmargin=0.25in
+%%% \topmargin=0.0in
+%%% \oddsidemargin=0.0in
+%%% \evensidemargin=0.0in
+
+\setlength{\textwidth}{6.5in}
+\setlength{\oddsidemargin}{0.0in}
+\setlength{\evensidemargin}{0.0in}
+\setlength{\textheight}{9in}
+\setlength{\topmargin}{-36pt}
+\setlength{\headheight}{12pt}
+\setlength{\headsep}{24pt}
+\setlength{\footskip}{24pt}
+\setlength{\parskip}{4pt plus 1pt}
+\renewcommand{\baselinestretch}{1.0}
+
+\pagenumbering{arabic}
+
+%   PUNCTUATION SPACING
+%  By default, punctuation [.?!:;,] is followed by extra space EXCEPT
+%  when the punctuation follows an upper case letter.  The following
+%  removes the exception, i.e., punctuation will produce extra space
+%  regardless of what character precedes the punctuation.  If you
+%  don't want the extra space, follow the offending punctuation mark
+%  with '\ ' or '~'.  \frenchspacing and \nonfrenchspacing work as
+%  usual to turn extra spacing off and back on, respectively.
+
+\sfcode`A=1000 \sfcode`B=1000 \sfcode`C=1000 \sfcode`D=1000
+\sfcode`E=1000 \sfcode`F=1000 \sfcode`G=1000 \sfcode`H=1000
+\sfcode`I=1000 \sfcode`J=1000 \sfcode`K=1000 \sfcode`L=1000
+\sfcode`M=1000 \sfcode`N=1000 \sfcode`O=1000 \sfcode`P=1000
+\sfcode`Q=1000 \sfcode`R=1000 \sfcode`S=1000 \sfcode`T=1000
+\sfcode`U=1000 \sfcode`V=1000 \sfcode`W=1000 \sfcode`X=1000
+\sfcode`Y=1000 \sfcode`Z=100
+
 
 %----------------------------------------------------------------------------------------
 %	THESIS INFORMATION
@@ -132,7 +191,6 @@ headsepline, % Uncomment to get a line under the header
 \end{center}
 \end{titlepage}
 
-
 %----------------------------------------------------------------------------------------
 %	QUOTATION PAGE
 %----------------------------------------------------------------------------------------
@@ -170,17 +228,17 @@ headsepline, % Uncomment to get a line under the header
 %	PROPOSAL
 %----------------------------------------------------------------------------------------
 
-\chapter*{Research topic}
+\chapter{\centering Research topic}
+In quest'ultimo decennio si è molto sentito parlare di moneta digitale e delle così dette criptovalute, da qualche anno infatti sulla bocca di tutti risaltano parole di innovazione e opportunità in seguito all'avvento della nuova tecnologia blockchain basata sulla logica di database distribuito. Proprio grazie a quest'ultima è nata la prima criptovaluta al mondo, più precisamente, il 3 gennaio 2009 veniva alla luce il blocco genesi di Bitcoin composto allora da 50 \emph{BTC} dal valore complessivo di neppure un dollaro statunitense dato il prezzo iniziale di \$0.0008 per Bitcoin. In seguito all'ottimo riscontro in molteplici campi il 6 novembre 2010 un Bitcoin si presentava con un valore di \$0,50, in meno di due anni il prezzo era aumentato di 625 volte, e da allora in poco più di sette anni, Bitcoin raggiunse il suo massimo storico di quasi \$20.000 ovvero circa 40.000 volte in più. Divenuto un caso più unico che raro, Bitcoin si è posto da apripista a più di 5000 altre criptovalute fino ad essere definito come l'oro del \RN{21} secolo. Questa definizione non è dovuta solo all'incredibile aumento del prezzo di Bitcoin negli ultimi anni ma anche ad una delle caratteristiche chiave che l'oro e la maggior parte delle criptovalute condivide, il processo di ``estrazione'' definito come \emph{mining} nel campo delle monete digitali.\\
+Il \emph{mining} di criptovalute consiste nel creare monete virtuali attraverso la risoluzione di alcune funzioni crittografiche necessarie per la validazione delle transazioni e dei blocchi che compongono una blockchain. Questa operazione termina con un compenso da parte della blockchain al miner, il quale avendo offerto la sua potenza di calcolo per la validazione del blocco viene premiato con la stessa criptovaluta minata. Questi calcoli vengono eseguiti dai sistemi informatici dedicati al processo specifico, questi sistemi sono divisi in due grandi macro sezioni: quelli che sfruttano la Central Processing Unit e quelli che sfruttano invece la Graphics processing unit. I primi prendono il nome di \emph{ASIC} acronimo di \emph{Application Specific Integrated Circuit} ovvero circuiti costruiti per la risoluzione di un calcolo ben specifico che risultano però molto inefficienti su altri tipi di algoritmi. I sistemi basati su GPU sono invece molto più prestanti grazie proprio al fatto che le schede video riescono ad effettuare più calcoli al secondo rispetto alle CPU e quindi risultare più redditizie, d'altro canto risultano essere molto più difficili nella gestione delle temperature e nettamente più costose in termini di assemblaggio e di efficienza energetica. Proprio questi ultimi costi sono quelli di notevole impatto quando si parla di mining, il costo di acquisto delle componenti è infatti nettamente aumentato negli ultimi anni, questo sia a causa delle nuove scoperte tecnologiche sia proprio a causa delle grandi farm di mining sparse per il mondo che acquistano costantemente sempre più componenti per ingrandire i propri centri di estrazione. Il costo energetico che questi sistemi comportano ha portato invece le grandi farm a svilupparsi maggiormente nei paesi con costi dell'elettricità più bassi e allo stesso tempo ha reso molto più impegnativo l'operazione di mining per chi volesse entrarne a far parte.\\
+È così che con l'aumentare dei costi e allo stesso tempo delle opportunità di guadagno offerte dal mondo delle blockchain sempre più in crescita che le criptovalute hanno iniziato a risaltare agli occhi degli hacker malintenzionati. Più precisamente la tecnologia blockchain, e di conseguenza le criptovalute, posseggono, per lo meno la maggior parte di esse, una caratteristica molto importante per i cyber criminali ovvero garantiscono una certa forma di anonimato. Le criptovalute infatti soffrono dello stesso problema del contante comune, non sono infatti in alcun modo collegabili ad un'entità specifica, l'unico ad averne controllo è colui che le possiede. L'unione di queste circostanze ha portato a un'enorme utilizzo delle criptovalute per lo svolgimento di azioni illecite attraverso il web, nel 2017 infatti si è riscontrato un netto aumento dei \emph{ransomware}, virus che bloccano in qualche modo il sistema al quale accedono con l'intento di ottenere un riscatto per il suo sblocco. L'incremento di questi attacchi è dovuto infatti principalmente alla pratica dei cyber criminali di richiedere il riscatto sotto forma di criptovalute così da risultare irrintracciabili, successivamente si è arrivati a una forma di attacco più intelligente e meno invasiva che utilizza i \emph{cryptominers}. Definito appunto come ``L'anno dei cryptominers'', il 2018 vede la stessa impennata di casi di \emph{ransomware} dell'anno precedente in una nuova tipologia di attacco che utilizza sì le criptovalute come mezzo di guadagno ma sfruttando un'operazione lecita come quella del mining. Questa tecnica detta \emph{cryptojacking} consiste in virus che si insidiano all'interno del computer della vittima ed utilizzano la sua potenza computazionale per l'estrazione di criptovalute, il guadagno di questo processo sarà poi attribuito non ai possessori del calcolatore bensì all'attaccante. Il tutto avviene seguendo un basso profilo tramite programmi infetti che vengono installati sul computer o più recentemente si è affermato l'utilizzo di script malevoli presenti all'interno di pagine web. La sostanziale differenza tra le due tipologie di \emph{cryptominers} sta principalmente nella loro rintracciabilità, infatti quelli che operano attraverso il web sono più difficili da controllare rispetto a programmi che vengono installati e che sono quindi sotto l'occhio diretto di antivirus e delle politiche dettate dal sistema operativo.\\
+L'ultima ma sostanziale differenziazione che va fatta quando si parla di \emph{cryptojacking} risiede nelle componenti del calcolatore che si va ad utilizzare: appurato che le GPU offrono dei ricavi maggiori in termini di \emph{mining} rispetto alle CPU, queste non sono però facilmente utilizzabili attraverso il web a differenza delle altre. Ciò ha portato infatti ad uno sviluppo maggiore dei \emph{cryptominers} basati su CPU e di conseguenza a sistemi di difesa che si concentrano su di essi mentre si sono trascurate le minacce derivanti da attacchi più sofisticati che puntano invece alla Graphics Processing Unit.
 
-Sempre più spesso si sente parlare di moneta digitale e delle così dette criptovalute, da qualche anno infatti sulla bocca di tutti risaltano parole di innovazione e opportunità in seguito all'avvento della nuova tecnologia blockchain basata sulla logica di database distribuito. Proprio grazie a quest'ultima è nata la prima criptovaluta al mondo, più precisamente, il 3 gennaio 2009 veniva alla luce il blocco genesi di Bitcoin composto allora da 50 \emph{BTC} dal valore complessivo che non raggiungeva neppure un dollaro statunitense dato il prezzo iniziale di \$0.0008 per Bitcoin. In seguito all'ottimo riscontro in molteplici campi il 6 novembre 2010 un Bitcoin si presentava con un valore di \$0,50, in meno di due anni il prezzo era aumentato di 625 volte, e da allora in poco più di sette anni, Bitcoin raggiunse il suo massimo storico di quasi \$20.000 ovvero circa 40.000 volte in più. Divenuto un caso più unico che raro, Bitcoin si è posto da apripista a più di 5000 altre criptovalute fino ad essere definito come l'oro del \RN{21} secolo. Questa definizione non è dovuta solo all'incredibile aumento del prezzo di Bitcoin negli ultimi anni ma anche ad una delle caratteristiche chiave che la maggior parte delle criptovalute condivide, ovvero il mining, il processo di ``estrazione'' delle monete digitali.\\
-Il mining di criptovalute consiste nel creare monete virtuali attraverso la risoluzione di alcune funzioni crittografiche necessarie per la validazione delle transazioni e dei blocchi che compongono una blockchain. Questi calcoli vengono eseguiti dai sistemi informatici dedicati a questo specifico processo, questi sistemi sono divisi in due grandi macro sezioni: quelli che sfruttano la Central Processing Unit e quelli che sfruttano invece la Graphics processing unit. I primi prendono il nome di \emph{ASIC} che sta per \emph{Application Specific Integrated Circuit} ovvero circuiti costruiti per la risoluzione di un calcolo ben specifico ma risultano molto inefficienti su altri tipi di algoritmi. I sistemi basati su GPU sono invece molto più prestanti grazie proprio al fatto che le schede video riescono ad effettuare più calcoli al secondo rispetto alle CPU e quindi risultare più redditizie, d'altro canto risultano essere molto più difficili nella gestione delle temperature e nettamente più costose in termini di assemblaggio e di efficienza energetica. Proprio questi ultimi costi sono quelli di notevole impatto quando si parla di mining, il costo di acquisto delle componenti è infatti nettamente aumentato negli ultimi anni, questo sia a causa delle nuove scoperte tecnologiche sia proprio a causa delle grandi farm di mining sparse per il mondo che acquistano sempre più componenti per ingrandire i propri centri di estrazione. Il costo energetico che questi sistemi comportano ha portato invece le grandi farm a svilupparsi maggiormente nei paesi con costi dell'elettricità più bassi e allo stesso tempo ha reso molto più impegnativo l'operazione di mining per chi volesse entrarne a far parte.\\
-È così che con l'aumentare dei costi e allo stesso tempo delle opportunità di guadagno offerte dal mondo delle blockchain sempre più in crescita che le criptovalute hanno iniziato a risaltare agli occhi degli hacker malintenzionati.
+\chapter{Related Work}
 
-\chapter*{Related Work}
+\chapter{Aims and Objectives}
 
-\chapter*{Aims and Objectives}
-
-\chapter*{Methodology}
+\chapter{Methodology}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
