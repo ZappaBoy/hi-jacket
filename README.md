@@ -1,2 +1,2 @@
-# hi-jack
-Hi-Jack - A GPU cryptojacker script
+# hi-jacket
+Hi-Jacket - A GPU cryptojacker script
