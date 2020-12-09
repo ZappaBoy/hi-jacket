@@ -1,7 +1,7 @@
 Citations: 
 
 https://www.bitcoinblockhalf.com/
-https://www.investopedia.com/terms/g/genesis-block.asp#:~:text=Key%20Takeaways-,Genesis%20Block%20is%20the%20name%20of%20the%20first%20block%20of,blocks%20in%20the%20Bitcoin%20blockchain.
+https://www.investopedia.com/terms/g/genesis-block.asp
 https://en.bitcoinwiki.org/wiki/Bitcoin_history#Bitcoin_in_2008
 https://www.coinlore.com/all_coins
 https://www.wired.it/economia/finanza/2019/01/03/bitcoin-2009-trasformazione-storia/
