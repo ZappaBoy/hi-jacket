@@ -1,0 +1,141 @@
+% Created 2020-12-11 Fri 10:02
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\hypersetup{hidelinks}
+\author{\href{mailto:f.zappone1@studenti.unimol.it}{Federico Zappone}}
+\date{2020-12-09 Wed}
+\title{Speech}
+\hypersetup{
+ pdfauthor={\href{mailto:f.zappone1@studenti.unimol.it}{Federico Zappone}},
+ pdftitle={Speech},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.1 (Org mode 9.5)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+
+\section{Presentazione}
+\label{sec:orgb8629ee}
+\section{Monete digitali}
+\label{sec:org2a0f6cf}
+Chi mi conosce non si stupirà vedendo che si parla di Blockchain
+\subsection{Blockchain}
+\label{sec:orgb90a2d8}
+È una tecnologia basata sul concetto di database distribuito, ovvero un sistema che utilizza un registro condiviso per salvare informazioni, esso è accessibile solo ai nodi della stessa rete ed è rappresentabile come una successione di blocchi contenenti le informazioni
+\subsection{Bitcoin}
+\label{sec:orga300de4}
+\subsubsection{Aumento di valore}
+\label{sec:orgc32d8b2}
+Da 8 millesimi di dollaro statunitense a 0.50 -> 625
+Da 0.50 dollari a 20.000 -> 40.000
+\subsubsection{Oro del XXI Secolo}
+\label{sec:orgae4d361}
+\subsubsection{Definito oro perché estraibile}
+\label{sec:orga5a26d8}
+\section{Mining}
+\label{sec:orgf932c17}
+\subsection{Come funziona?}
+\label{sec:org796bb44}
+Consiste nel creare monete virtuali attraverso la risoluzione di alcune funzioni crittografiche necessarie per la validazione delle transazioni e dei blocchi che compongono una blockchain.
+\subsection{Compenso}
+\label{sec:orge737275}
+Questa operazione termina con un compenso da parte della blockchain al miner, il quale, avendo offerto la sua potenza di calcolo viene premiato con la stessa criptovaluta minata
+\subsection{GPU e CPU}
+\label{sec:orgb78756f}
+ASIC, acronimo di Application Specific Integrated Circuit
+\section{Criptovalute per attacchi informatici}
+\label{sec:org9e0f7ac}
+\subsection{Criptovalute bene o male?}
+\label{sec:orgb984807}
+\subsection{Ransomware}
+\label{sec:org7ccc772}
+\subsection{Anonimato}
+\label{sec:org209e76b}
+\subsection{Criptominers e Cryptojacking}
+\label{sec:org0eb10a0}
+\subsection{Diffusione}
+\label{sec:org86fe4f1}
+\section{Perché nel Web?}
+\label{sec:orgad2b818}
+\section{{\bfseries\sffamily TODO} Related Works}
+\label{sec:org7d2808a}
+Ci si è mossi principalmente vero la CPU
+Sia Musch et al. [6] che Saad et al. [7] mostrano la diffusione di cryptominers basati su CPU nei siti web, inoltre analizzano l’efficacia di tecniche difensive di blacklisting che risultano però essere una protezione insufficiente e poco pratica. Wang et al. [8] forniscono in seguito un metodo di analisi di firme basate su istruzioni della CPU durante l’esecuzione dei moduli WebAssembly. Konoth et al. [9] introducono invece MineSweeper basato anch’esso sul precedente principio di firme ma aggiunge inoltre il rilevamento di eccessive chiamate di sistema di natura crittografica durante l’esecuzione di un programma. Un differente approccio viene fornito da Tahir et al. [10] che presentano MineGuard, un sistema che tramite l’analisi delle prestazioni hardware rileva l’esecuzione di alcuni algoritmi di mining. MineGuard monitora costantemente sia CPU che GPU ed inoltre offre un’ottima soluzione sia in termini di efficienza che di utilizzo di risorse per la sua esecuzione. Belkin, Gelernter e Cidon [11] offrono infine una soluzione dedicata esclusivamente a cryptominers di GPU che risulta essere più pratica in ambito web rispetto alle altre, questo analizzando le pagine web che utilizzano WebGL
+\section{OpenGL}
+\label{sec:org00c2f0c}
+È una specifica considerata ormai lo standard per quanto riguarda la grafica tridimensionale nei
+sistemi operativi Unix-like. In particolare OpenGL è stata pensata per architetture parallelizzabili
+come le GPU e definisce delle API per applicazioni che operano in ambienti 3D
+\subsection{WebGL}
+\label{sec:org58f529d}
+\section{Come funziona Hi-Jacket?}
+\label{sec:orgfd9cb03}
+\subsection{Idea}
+\label{sec:org6a56314}
+\subsection{Javascript}
+\label{sec:orgc529a7f}
+\subsection{GPU.js}
+\label{sec:orgad27029}
+\subsubsection{GPU.js benchmark}
+\label{sec:org36630a8}
+\subsection{XSS}
+\label{sec:org10d825e}
+\subsubsection{Tipi di XSS}
+\label{sec:org175ca20}
+\begin{itemize}
+\item XSS reflected: il payload viene eseguito solo nel momento dell’iniezione;
+\item XSS stored: il payload viene salvato all’interno della struttura dell’applicativo ed eseguito
+\end{itemize}
+ad ogni accesso del contenuto;
+\begin{itemize}
+\item XSS dom-based: il codice sorgente e la risposta del server non vengono modificate, il payload
+\end{itemize}
+viene eseguito a runtime senza inoltrare richieste al server ma utilizzando il codice già presente nella pagina.
+\subsubsection{XSStrike, Traxss e XSSer}
+\label{sec:org2bd1f52}
+\subsection{Injection automatica}
+\label{sec:orga249ac0}
+\subsection{Come testare?}
+\label{sec:orgfb26cd2}
+\subsubsection{Clonare i siti vulnerabili}
+\label{sec:orga8af3cf}
+\begin{enumerate}
+\item XSSed
+\label{sec:org4e9dba9}
+\end{enumerate}
+\subsubsection{Macchina virtuale}
+\label{sec:org474f15a}
+\section{Difesa}
+\label{sec:org8779223}
+\subsection{Estensione browser}
+\label{sec:orgab5b60a}
+\subsection{Code obfuscation}
+\label{sec:orga39b81d}
+\subsection{Monitoring}
+\label{sec:org7f61844}
+\section{Deliverables}
+\label{sec:org6ac591c}
+\subsection{GitHub}
+\label{sec:orgfa5c559}
+\subsection{Cryptominer e injector}
+\label{sec:orgc8845cc}
+\subsection{Possibile difesa}
+\label{sec:org8286095}
+\end{document}

@@ -1,0 +1,75 @@
+#+TITLE: Speech
+#+AUTHOR: [[mailto:f.zappone1@studenti.unimol.it][Federico Zappone]]
+#+DATE: 2020-12-09 Wed
+#+EMAIL: f.zappone1@studenti.unimol.it
+#+SUBTITLE:
+#+DESCRIPTION:
+#+KEYWORDS:
+#+TEXT:
+#+LATEX_HEADER: \hypersetup{hidelinks}
+
+* Presentazione
+* Monete digitali
+Chi mi conosce non si stupirà vedendo che si parla di Blockchain
+** Blockchain
+È una tecnologia basata sul concetto di database distribuito, ovvero un sistema che utilizza un registro condiviso per salvare informazioni, esso è accessibile solo ai nodi della stessa rete ed è rappresentabile come una successione di blocchi contenenti le informazioni
+** Bitcoin
+*** Aumento di valore
+Da 8 millesimi di dollaro statunitense a 0.50 -> 625
+Da 0.50 dollari a 20.000 -> 40.000
+*** Oro del XXI Secolo
+*** Definito oro perché estraibile
+* Mining
+** Come funziona?
+Consiste nel creare monete virtuali attraverso la risoluzione di alcune funzioni crittografiche necessarie per la validazione delle transazioni e dei blocchi che compongono una blockchain.
+** Compenso
+Questa operazione termina con un compenso da parte della blockchain al miner, il quale, avendo offerto la sua potenza di calcolo viene premiato con la stessa criptovaluta minata
+** GPU e CPU
+ASIC, acronimo di Application Specific Integrated Circuit
+* Criptovalute per attacchi informatici
+** Criptovalute bene o male?
+** Ransomware
+** Anonimato
+** Criptominers e Cryptojacking
+** Diffusione
+* Perché nel Web?
+* TODO Related Works
+Ci si è mossi principalmente vero la CPU
+Sia Musch et al. [6] che Saad et al. [7] mostrano la diffusione di cryptominers basati su CPU nei siti web, inoltre analizzano l’efficacia di tecniche difensive di blacklisting che risultano però essere una protezione insufficiente e poco pratica. Wang et al. [8] forniscono in seguito un metodo di analisi di firme basate su istruzioni della CPU durante l’esecuzione dei moduli WebAssembly. Konoth et al. [9] introducono invece MineSweeper basato anch’esso sul precedente principio di firme ma aggiunge inoltre il rilevamento di eccessive chiamate di sistema di natura crittografica durante l’esecuzione di un programma. Un differente approccio viene fornito da Tahir et al. [10] che presentano MineGuard, un sistema che tramite l’analisi delle prestazioni hardware rileva l’esecuzione di alcuni algoritmi di mining. MineGuard monitora costantemente sia CPU che GPU ed inoltre offre un’ottima soluzione sia in termini di efficienza che di utilizzo di risorse per la sua esecuzione. Belkin, Gelernter e Cidon [11] offrono infine una soluzione dedicata esclusivamente a cryptominers di GPU che risulta essere più pratica in ambito web rispetto alle altre, questo analizzando le pagine web che utilizzano WebGL
+* OpenGL
+È una specifica considerata ormai lo standard per quanto riguarda la grafica tridimensionale nei
+sistemi operativi Unix-like. In particolare OpenGL è stata pensata per architetture parallelizzabili
+come le GPU e definisce delle API per applicazioni che operano in ambienti 3D
+** WebGL
+* Come funziona Hi-Jacket?
+** Idea
+** Javascript
+** GPU.js
+*** GPU.js benchmark
+** XSS
+*** Tipi di XSS
+- XSS reflected: il payload viene eseguito solo nel momento dell’iniezione;
+- XSS stored: il payload viene salvato all’interno della struttura dell’applicativo ed eseguito
+ad ogni accesso del contenuto;
+- XSS dom-based: il codice sorgente e la risposta del server non vengono modificate, il payload
+viene eseguito a runtime senza inoltrare richieste al server ma utilizzando il codice già presente nella pagina.
+*** XSStrike, Traxss e XSSer
+** Injection automatica
+** Come testare?
+*** Clonare i siti vulnerabili
+**** XSSed
+*** Macchina virtuale
+* Difesa
+** Estensione browser
+** Code obfuscation
+** Monitoring
+* Deliverables
+** GitHub
+** Cryptominer e injector
+** Possibile difesa
+
+
+
+# Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+
+# Icons made by <a href="https://www.flaticon.com/free-icon/robber_2323058" title="Nhor Phai">Nhor Phai</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
