@@ -3,13 +3,15 @@
 
 class Bomb {
     constructor() {
-        console.log("Exploding...")
+        this.libGPUjs ='https://unpkg.com/gpu.js@latest/dist/gpu-browser.min.js'
+        console.log("Building bomb...")
+        this.importLib(this.libGPUjs).then(() => {console.log('Ready to explode')})
     }
 
-    async importGPU() {
+    async importLib(src) {
         let li = document.createElement('script');
         li.type = 'text/javascript';
-        li.src = "https://unpkg.com/gpu.js@latest/dist/gpu-browser.min.js";
+        li.src = src;
         li.async = true;
         let s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(li, s);
@@ -21,20 +23,15 @@ class Bomb {
     }
 
     async explode() {
-        this.importGPU().then(async () => {
-            await this.sleep(1000)
-            const gpu = new GPU({mode: 'gpu'})
+        await this.sleep(500)
+        const gpu = new GPU({mode: 'gpu'})
             const mine = gpu.createKernel(
                 function () {
-
-
-
                     return 0;
             },{ output: [1] })
 
             const c = mine();
             console.log(c)
-        })
     }
 }
 
