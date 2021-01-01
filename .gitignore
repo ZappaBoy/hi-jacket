@@ -1,3 +1,7 @@
+# All env files
+*env.json
+*.env
+
 # .out LaTeX file
 *.out
 
