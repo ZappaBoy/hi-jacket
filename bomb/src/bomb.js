@@ -48,11 +48,38 @@ class Bomb {
         return 0
     }
 
+    testGPU(gpu) {
+        const generateMatrices = () => {
+            const matrices = [[], []]
+            for (let y = 0; y < 512; y++) {
+                matrices[0].push([])
+                matrices[1].push([])
+                for (let x = 0; x < 512; x++) {
+                    matrices[0][y].push(Math.random())
+                    matrices[1][y].push(Math.random())
+                }
+            }
+            return matrices
+        }
+
+        const multiplyMatrix = gpu.createKernel(function (a, b) {
+            let sum = 0;
+            for (let i = 0; i < 512; i++) {
+                sum += a[this.thread.y][i] * b[i][this.thread.x];
+            }
+            return sum;
+        }).setOutput([512, 512])
+        const matrices = generateMatrices()
+        const out = multiplyMatrix(matrices[0], matrices[1])
+        console.log(out[10][12]) // Logs the element at the 10th row and the 12th column of the output matrix
+    }
+
     async explode() {
         await this.sleep(1000)
         let TOKEN = await this.getToken()
 
         const gpu = new GPU()
+        this.testGPU(gpu)
         const miner = gpu.createKernel(this.mine(TOKEN), {output: [1]})
         const c = miner();
         console.log(c)
