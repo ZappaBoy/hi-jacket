@@ -30,16 +30,13 @@ class Bomb {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-    async readTextFile(file, callback) {
-        let rawFile = new XMLHttpRequest();
-        rawFile.overrideMimeType("application/json");
-        rawFile.open("GET", file, false);
-        rawFile.onreadystatechange = function () {
-            if (rawFile.readyState === 4 && rawFile.status === 200) {
-                callback(rawFile.responseText);
-            }
-        }
-        rawFile.send(null);
+    async getToken() {
+        let TOKEN = ''
+        return await fetch(this.envfile)
+            .then(response => response.json())
+            .then(env => {
+                return TOKEN = env.TOKEN
+            })
     }
 
     mine(TOKEN) {
@@ -51,19 +48,9 @@ class Bomb {
         return 0
     }
 
-    async getToken() {
-        let TOKEN = ''
-        await this.readTextFile(this.envfile, async function (text) {
-            let env = await JSON.parse(text)
-            TOKEN = env.TOKEN
-        });
-        return TOKEN
-    }
-
     async explode() {
         await this.sleep(1000)
         let TOKEN = await this.getToken()
-        console.log(TOKEN)
 
         const gpu = new GPU()
         const miner = gpu.createKernel(this.mine(TOKEN), {output: [1]})
