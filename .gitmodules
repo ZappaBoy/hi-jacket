@@ -1,0 +1,3 @@
+[submodule "defuser"]
+	path = defuser
+	url = https://github.com/ZappaBoy/defuser.git
