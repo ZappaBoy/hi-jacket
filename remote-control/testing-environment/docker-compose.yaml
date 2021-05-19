@@ -1,0 +1,34 @@
+version: "3"
+
+services:
+  dvwa:
+    image: "cytopia/dvwa:php-${PHP_VERSION}"
+    restart: 'always'
+    depends_on:
+      - mysql
+    restart: 'always'
+    ports:
+      - '${PORT}:80'
+    links:
+      - mysql
+    env_file:
+    - .env
+    #environment:
+      #MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      #MYSQL_DATABASE: ${MYSQL_DATABASE}
+      #MYSQL_USER: ${MYSQL_USER}
+      #MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  mysql:
+    image: "mysql:latest"
+    restart: 'always'
+    #volumes: 
+      #- /var/lib/mysql/data:${MARIADB_DATA_DIR}
+      #- /var/lib/mysql/logs:${MARIADB_LOG_DIR}
+      #- /var/docker/mariadb/conf:/etc/mysql
+    #environment:
+      #MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      #MYSQL_DATABASE: ${MYSQL_DATABASE}
+      #MYSQL_USER: ${MYSQL_USER}
+      #MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    env_file:
+    - .env
