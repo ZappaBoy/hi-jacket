@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -xeuo pipefail
+set -euo pipefail
 
 SCRIPT_PATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
@@ -35,16 +35,9 @@ print_info() {
     echo "----- PAYLOAD ----- "
     echo "$PAYLOAD"
     echo ""
-    # echo "Sites urls:"
-    # echo "${SITES_URLS[@]}"
-    # echo ""
 }
 
 inject_payload() {
-    # curl -X POST \
-    #     'http://localhost:8060/vulnerabilities/xss_s/index.php' \
-    #     -b 'PHPSESSID=c8fcccd96a575a05d6eb307c8107d718; security=low' \
-    #     --data 'txtName=hijacked&mtxMessage=%3Cscript%3Ealert%282%29%3C%2Fscript%3E&btnSign=Sign+Guestbook'
     echo "----- INJECTING PAYLOAD -----"
     REPORT_FILE=${1}
     MODE=${2}
@@ -82,9 +75,7 @@ scan_vulns(){
     SCAN_MODE="${1:-""}"
     URL="${2:-""}"
     ENDPOINT="${3:-""}"
-    # ADVANCED_OPTIONS=${4:-""}
     COOKIE="${4:-""}"
-    echo $COOKIE
 
     [ -z "$URL" ] && exit 0
 
@@ -178,7 +169,7 @@ while getopts "sip:" OPTION; do
                 INJECT=true
                 ;;
             p)
-                PAYLOAD=$(cat $OPTARG)
+                PAYLOAD=$(cat "${OPTARG}")
                 ;;
             *)
                 usage
