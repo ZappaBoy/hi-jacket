@@ -1,0 +1,35 @@
+let li = document.createElement('script');
+li.src = 'https://unpkg.com/gpu.js@latest/dist/gpu-browser.min.js';
+li.async = false;
+let s = document.getElementsByTagName('script')[0];
+s.parentNode.insertBefore(li, s);
+
+setTimeout(() => {
+    const gpu = new GPU()
+
+    const DIMENSION = 8096
+    const generateMatrices = () => {
+        const matrices = [[], []]
+        for (let y = 0; y < DIMENSION; y++) {
+            matrices[0].push([])
+
+            matrices[1].push([])
+            for (let x = 0; x < DIMENSION; x++) {
+                matrices[0][y].push(Math.random())
+                matrices[1][y].push(Math.random())
+            }
+        }
+        return matrices
+    }
+
+    const multiplyMatrix = gpu.createKernel(function (a, b, dim) {
+        let sum = 0;
+        for (let i = 0; i < dim; i++) {
+            sum += a[this.thread.y][i] * b[i][this.thread.x];
+        }
+        return sum;
+    }).setOutput([DIMENSION, DIMENSION])
+    const matrices = generateMatrices()
+    const out = multiplyMatrix(matrices[0], matrices[1], DIMENSION)
+    console.log(out)
+}, 3000);
