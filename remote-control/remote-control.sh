@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Usage: ./remote-control.sh -s -i
+
 SCRIPT_PATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
 
 PAYLOAD_FILE_PATH="${SCRIPT_PATH}/payload.txt"
