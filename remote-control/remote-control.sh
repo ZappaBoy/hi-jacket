@@ -17,6 +17,7 @@ PAYLOAD="${PAYLOAD_FILE_CONTENT:-$DEFAULT_PAYLOAD}"
 INJECT=false
 SCAN=false
 
+mkdir -p "$RESULTS_PATH"
 read_list() {
     ARRAY=( $( echo "${1}" ) )
     echo "${ARRAY[@]}"
