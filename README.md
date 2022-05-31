@@ -31,7 +31,7 @@ Here is an example:
 
 ```shell
 GET         http://xss-game.appspot.com                                     /level1/frame?query=XSS
-POST        http://localhost:8060/vulnerabilities/xss_s/index.php           txtName=hijacked&mtxMessage=XSS&btnSign=Sign+Guestbook      PHPSESSID="YOURPHPSESSID;;security=low"
+POST        http://localhost:8060/vulnerabilities/xss_s/index.php           txtName=hijacked&mtxMessage=XSS&btnSign=Sign+Guestbook      PHPSESSID=YOURPHPSESSID;security=low
 ALL         http://localhost:8060/vulnerabilities/xss_s/index.php
 AUTO        http://xss-game.appspot.com                                     /level1/frame?query=XSS
 DEFAULT     http://xss-game.appspot.com                                     /level1/frame?query=XSS

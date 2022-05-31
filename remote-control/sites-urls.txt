@@ -1,5 +1,5 @@
 #GET         http://xss-game.appspot.com                                     /level1/frame?query=XSS
-POST        http://localhost:8060/vulnerabilities/xss_s/index.php           txtName=hijacked&mtxMessage=XSS&btnSign=Sign+Guestbook      PHPSESSID="93e903a672e3610cafdd06a783bdc375;;security=low"
+POST        http://localhost:8060/vulnerabilities/xss_s/index.php           txtName=hijacked&mtxMessage=XSS&btnSign=Sign+Guestbook      PHPSESSID=93e903a672e3610cafdd06a783bdc375;security=low
 #ALL         http://localhost:8060/vulnerabilities/xss_s/index.php
 #AUTO        http://xss-game.appspot.com                                     /level1/frame?query=XSS
 #DEFAULT     http://xss-game.appspot.com                                     /level1/frame?query=XSS
